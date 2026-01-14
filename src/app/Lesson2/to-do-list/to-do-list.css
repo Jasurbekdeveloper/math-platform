@@ -1,0 +1,107 @@
+/* Umumiy sahifa */
+h1 {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Input, button, select joylashuvi */
+div:first-of-type {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+/* Input */
+input[type="text"] {
+  padding: 8px 10px;
+  width: 220px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #4caf50;
+}
+
+/* Button */
+button {
+  padding: 8px 14px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #43a047;
+}
+
+/* Select */
+select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Table */
+table {
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table header */
+thead {
+  background-color: #f5f5f5;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  font-weight: 600;
+}
+
+/* Row hover */
+tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Status ranglari (inline style bilan ham mos) */
+td:nth-child(3) {
+  font-weight: 600;
+}
+
+/* Action button */
+td button {
+  background-color: #2196f3;
+}
+
+td button:hover {
+  background-color: #1976d2;
+}
+
+/* Empty state */
+p {
+  text-align: center;
+  padding: 10px;
+}
