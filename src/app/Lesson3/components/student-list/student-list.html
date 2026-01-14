@@ -1,1 +1,34 @@
-<p>student-list works!</p>
+<div class="calculator">
+  <input type="number" [(ngModel)]="num1">
+  <input type="number" [(ngModel)]="num2">
+
+  <div class="operations">
+    <app-student-crud
+      label="+"
+      operation="add"
+      (buttonClicked)="calculate($event)">
+    </app-student-crud>
+
+    <app-student-crud
+      label="-"
+      operation="subtract"
+      (buttonClicked)="calculate($event)">
+    </app-student-crud>
+
+    <app-student-crud
+      label="×"
+      operation="multiply"
+      (buttonClicked)="calculate($event)">
+    </app-student-crud>
+    
+    <app-student-crud
+      label="÷"
+      operation="divide"
+      (buttonClicked)="calculate($event)">
+    </app-student-crud>
+  </div>
+
+  <div class="result">
+    Natija: {{ result }}
+  </div>
+</div>

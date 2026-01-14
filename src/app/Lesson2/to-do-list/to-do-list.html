@@ -1,1 +1,37 @@
-<p>to-do-list works!</p>
+<h1>To-Do List</h1>
+    <p>This is the To-Do List component.</p>
+    <div>
+      <input type="text" placeholder="task qo'shish" [(ngModel)]="task" />
+      <button (click)="addTask()">Qo'shish</button>
+      <select [(ngModel)]="taskStatus" (change)="filterTasks()">
+        <option value="all">All</option>
+        <option value="completed">Completed</option>
+        <option value="pending">Pending</option>
+      </select>
+     
+    </div>
+
+    <div>
+        <table>
+          <thead>
+            <tr>
+              <th>T/r</th>
+              <th>Task nomi</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (task of tasks; track task.id; let i = $index) {
+              <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ task.name }}</td>
+                <td [style.color]="task.taskStatus === 'completed' ? 'green' : 'blue'">{{ task.taskStatus }}</td>
+                <td><button (click)="changeTaskStatus(task.id)">O'zgartirish</button></td>
+              </tr>
+            }@empty {
+                <p>Not found students</p>
+            }
+          </tbody>
+    </table>
+    </div>
