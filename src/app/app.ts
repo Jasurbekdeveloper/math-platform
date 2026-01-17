@@ -8,5 +8,5 @@ import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('math-platform');
+   title = 'Angular-Practice';
 }
