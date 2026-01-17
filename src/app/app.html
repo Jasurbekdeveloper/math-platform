@@ -1,9 +1,47 @@
-<!-- <h1>Math Platform First companent</h1>
-<app-my-button></app-my-button>
-<h1>Calculator Second Component</h1>
-<app-math-operations></app-math-operations> -->
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <ul class="space-y-2">
+        <!-- Home -->
+        <li>
+          <a routerLink="/" class="text-indigo-600 hover:text-indigo-800 font-semibold transition-colors text-lg">
+            🏠 Home
+          </a>
+        </li>
 
-<!-- <app-student-list></app-student-list> -->
-<!-- <h1>Login Page</h1>
-<app-login-page></app-login-page> -->
-<app-to-do-list></app-to-do-list>
+        <li class="pt-2">
+          <h4 class="font-bold text-gray-700 text-sm mb-2">📖 Lesson 1 - Components</h4>
+          <ul class="space-y-1 ml-4">
+            <li>
+              <a routerLink="/counter" class="text-blue-600 hover:text-blue-800 transition-colors">→ Counter Button</a>
+            </li>
+            <li>
+              <a routerLink="/calculator" class="text-blue-600 hover:text-blue-800 transition-colors">→ Math Operations</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="pt-2">
+          <h4 class="font-bold text-gray-700 text-sm mb-2">📖 Lesson 2 - Forms & Lists</h4>
+          <ul class="space-y-1 ml-4">
+            <li>
+              <a routerLink="/login" class="text-green-600 hover:text-green-800 transition-colors">→ Login Page</a>
+            </li>
+            <li>
+              <a routerLink="/student-list" class="text-green-600 hover:text-green-800 transition-colors">→ Student List</a>
+            </li>
+            <li>
+              <a routerLink="/to-do-list" class="text-green-600 hover:text-green-800 transition-colors">→ To-Do List</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="pt-2">
+          <h4 class="font-bold text-gray-700 text-sm mb-2">📖 Lesson 3 - CRUD Services</h4>
+          <ul class="space-y-1 ml-4">
+            <li>
+              <a routerLink="/student-new-list" class="text-purple-600 hover:text-purple-800 font-semibold transition-colors">→ Student CRUD System</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <router-outlet></router-outlet>

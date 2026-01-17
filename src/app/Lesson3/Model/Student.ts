@@ -1,6 +1,6 @@
-interface Student {
+export interface Student {
     id: number;
     name: string;
     score: number;
-    grade: string;
+    subject: string;
 }

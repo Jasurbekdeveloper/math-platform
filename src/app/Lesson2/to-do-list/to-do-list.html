@@ -4,9 +4,9 @@
       <input type="text" placeholder="task qo'shish" [(ngModel)]="task" />
       <button (click)="addTask()">Qo'shish</button>
       <select [(ngModel)]="taskStatus" (change)="filterTasks()">
-        <option value="all">All</option>
-        <option value="completed">Completed</option>
-        <option value="pending">Pending</option>
+        @for (status of taskStatusList; track $index) {
+          <option value={{status}}>{{status}}</option>
+        }
       </select>
      
     </div>

@@ -1,37 +1,61 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Student } from '../../Model/Student';
 
 @Component({
   selector: 'app-student-form',
-  imports: [FormsModule],
-  template: `
-    <h3>Add Student</h3>
-
-    <input placeholder="Name" [(ngModel)]="name" />
-    <input type="number" placeholder="Score" [(ngModel)]="score" />
-    <button (click)="submit()">Add</button>
-  `,
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  templateUrl: './student-form.html',
   styleUrl: './student-form.css',
 })
-export class StudentForm {
-  name = '';
-  score!: number;
+export class StudentForm implements OnChanges {
+  @Input() student?: Student;
+  @Output() save = new EventEmitter<Student>();
 
-  @Output() addStudent = new EventEmitter<Student>();
+  model: Student = this.initializeModel();
+  validationError: string = '';
+
+  private initializeModel(): Student {
+    return { id: 0, name: '', subject: '', score: 0 };
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['student']) {
+      if (this.student) {
+        this.model = { ...this.student };
+      } else {
+        this.resetForm();
+      }
+      this.validationError = '';
+    }
+  }
+
+  resetForm() {
+    this.model = this.initializeModel();
+    this.validationError = '';
+  }
 
   submit() {
-    if (!this.name || !this.score) return;
+    this.validationError = '';
 
-    const newStudent: Student = {
-      id: Date.now(),
-      name: this.name,
-      score: this.score,
-      grade: this.score >= 90 ? 'A' : this.score >= 80 ? 'B' : this.score >= 70 ? 'C' : 'D',
-    };
+    if (!this.model.name || this.model.name.trim().length === 0) {
+      this.validationError = 'Ism maydon bo\'sh bo\'lishi mumkin emas';
+      return;
+    }
 
-    this.addStudent.emit(newStudent);
+    if (!this.model.subject || this.model.subject.trim().length === 0) {
+      this.validationError = 'Fan maydon bo\'sh bo\'lishi mumkin emas';
+      return;
+    }
 
-    this.name = '';
-    this.score = 0;
+    if (this.model.score < 0 || this.model.score > 100) {
+      this.validationError = 'Baho 0 va 100 orasida bo\'lishi kerak';
+      return;
+    }
+
+    this.save.emit(this.model);
+    this.resetForm();
   }
 }

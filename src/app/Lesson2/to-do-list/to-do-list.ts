@@ -17,6 +17,9 @@ export class ToDoList {
 
   taskStatus: TaskStatus = 'pending';
   tasks: Task[] = [...this.allTasks];
+  taskStatusList : string[] = [
+    'all','pending', 'completed', 
+  ];
 
   addTask() {
    if (this.task.trim()) {

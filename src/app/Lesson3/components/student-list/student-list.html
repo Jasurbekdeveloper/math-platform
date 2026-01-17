@@ -1,34 +1,100 @@
-<div class="calculator">
-  <input type="number" [(ngModel)]="num1">
-  <input type="number" [(ngModel)]="num2">
+<div class="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-100 p-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-800 mb-2">Talabalar Ro'yxati</h1>
+      <p class="text-gray-600">CRUD (Create, Read, Update, Delete) Tizimi</p>
+    </div>
 
-  <div class="operations">
-    <app-student-crud
-      label="+"
-      operation="add"
-      (buttonClicked)="calculate($event)">
-    </app-student-crud>
+    <!-- Filter Section -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-blue-500">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Filtrlash</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Filter by Score -->
+        <div>
+          <label class="block text-gray-700 font-semibold mb-2">Baho bo'yicha:</label>
+          <select 
+            [(ngModel)]="score" 
+            (change)="filterStudents()"
+            name="scoreFilter"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option [ngValue]="null">Barchasi</option>
+            @for (s of studentScores; track s) {
+              <option [ngValue]="s">{{ s }}</option>
+            }
+          </select>
+        </div>
 
-    <app-student-crud
-      label="-"
-      operation="subtract"
-      (buttonClicked)="calculate($event)">
-    </app-student-crud>
+        <!-- Filter by Subject -->
+        <div>
+          <label class="block text-gray-700 font-semibold mb-2">Fan bo'yicha:</label>
+          <select 
+            [(ngModel)]="subject" 
+            (change)="filterStudents()"
+            name="subjectFilter"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Barchasi</option>
+            @for (sub of studentSubjects; track sub) {
+              <option [value]="sub">{{ sub }}</option>
+            }
+          </select>
+        </div>
 
-    <app-student-crud
-      label="×"
-      operation="multiply"
-      (buttonClicked)="calculate($event)">
-    </app-student-crud>
-    
-    <app-student-crud
-      label="÷"
-      operation="divide"
-      (buttonClicked)="calculate($event)">
-    </app-student-crud>
-  </div>
+        <!-- Reset Button -->
+        <div class="flex items-end">
+          <button 
+            (click)="resetFilters()"
+            class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
+            Reset Filtrs
+          </button>
+        </div>
+      </div>
+    </div>
 
-  <div class="result">
-    Natija: {{ result }}
+    <!-- Form Section -->
+    <app-student-form
+      [student]="selectedStudent"
+      (save)="onSaveEdit($event)">
+    </app-student-form>
+
+    <!-- Students Cards -->
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Talabalar ({{ students.length }})</h2>
+      
+      @if (students.length > 0) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          @for (s of students; track s.id) {
+            <app-student-card
+              [student]="s"
+              (delete)="onDelete($event)"
+              (edit)="onEdit($event)">
+            </app-student-card>
+          }
+        </div>
+      } @else {
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-8 text-center">
+          <p class="text-gray-600 text-lg">Hech qanday talaba topilmadi</p>
+        </div>
+      }
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-blue-50 border border-blue-200 rounded-lg shadow-md p-6">
+        <p class="text-gray-600 font-semibold mb-2">Jami Talaba</p>
+        <p class="text-3xl font-bold text-blue-600">{{ allStudents.length }}</p>
+      </div>
+
+      <div class="bg-green-50 border border-green-200 rounded-lg shadow-md p-6">
+        <p class="text-gray-600 font-semibold mb-2">O'rtacha Baho</p>
+        <p class="text-3xl font-bold text-green-600">{{ getAverageScore() }}</p>
+      </div>
+
+      <div class="bg-purple-50 border border-purple-200 rounded-lg shadow-md p-6">
+        <p class="text-gray-600 font-semibold mb-2">Eng Yaxshi Talaba</p>
+        <p class="text-sm font-bold text-purple-600">{{ getTopStudent() }}</p>
+      </div>
+    </div>
   </div>
 </div>
